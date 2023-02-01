@@ -7,7 +7,7 @@ This is a project for transition element which height is auto based on this [art
 #### NPM
 ```bash
 yarn add vue3-transition-expand
-// or
+# or
 npm install vue3-transition-expand
 ```
 

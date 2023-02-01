@@ -1,11 +1,22 @@
 {
     "name": "vue3-transition-expand",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "type": "module",
     "homepage": "https://github.com/vuejs/core/tree/main/packages/vue#readme",
     "repository": "mrleblanc101/vue3-transition-expand",
     "files": [
         "dist"
+    ],
+    "keywords": [
+        "vue",
+        "nuxt",
+        "transition",
+        "auto",
+        "height",
+        "expand",
+        "animation",
+        "component",
+        "slideToggle"
     ],
     "main": "./dist/vue3-transition-expand.umd.cjs",
     "module": "./dist/vue3-transition-expand.js",
