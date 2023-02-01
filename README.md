@@ -1,66 +1,68 @@
-# Transition to height auto with Vue.js
+# Vue Transition Expand (for Vue 3)
 
-This is a project for transition element which height is auto.
-
-## Example
-[Transition to height auto with Vue.js](https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/)
+This is a project for transition element which height is auto based on this [article](https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/).
 
 ## Installation
 
 #### NPM
 ```bash
-npm install --save vue-transition-expand
+yarn add vue3-transition-expand
+// or
+npm install vue3-transition-expand
 ```
 
 ## Import
 
 #### Globally
 ```javascript
-import TransitionExpand from 'vue-transition-expand'
-import 'vue-transition-expand/dist/vue-transition-expand.css'
+import TransitionExpand from 'vue3-transition-expand'
 
 Vue.use(TransitionExpand)
+
+// To override the default duration
+Vue.use(TransitionExpand, {
+    duration: 300 // default
+})
+```
+
+
+#### Nuxt plugin
+```js
+import TransitionExpand from 'vue3-transition-expand';
+import 'vue3-transition-expand/dist/style.css';
+
+export default defineNuxtPlugin((nuxtApp) => {
+    nuxtApp.vueApp.use(TransitionExpand, {
+        duration: 300 // default
+    });
+});
 ```
 
 #### SFC
 
-```javascript
-import {TransitionExpand} from 'vue-transition-expand'
-import 'vue-transition-expand/dist/vue-transition-expand.css'
+```js
+import { TransitionExpand } from 'vue3-transition-expand';
 
 export default {
-  name: 'HelloWorld',
-  components: {
-    TransitionExpand
-  },
-  data () {
-    return {
-      show: false,
-      ...
-    }
-  },
-  ...
+    components: {
+        TransitionExpand,
+    },
+    data () {
+        return {
+            expanded: false,
+        };
+    },
 }
 ```
 
 ## Example
-```
-<transition-expand>
-      <div v-if="show" class="box">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-      <button @click="show = !show">Click !</button>
+```html
+<transition-expand v-model="expanded" :duration="300">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </transition-expand>
+<button @click="show = !show">Expand !</button>
 ```
 
-## About
-
-### Author
-
-Markus Oberlehner  
-Website: https://markus.oberlehner.net  
-Twitter: https://twitter.com/MaOberlehner
-
-### License
-
-MIT
+## TODO
+- [ ] Add TypeScript Definition
+- [ ] Provide Nuxt module/plugin

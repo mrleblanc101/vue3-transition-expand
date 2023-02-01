@@ -1,36 +1,30 @@
 {
-  "name": "vue-transition-expand",
-  "version": "0.0.5",
-  "author": "Markus Oberlehner",
-  "homepage": "https://github.com/yanzijun/transition-to-height-auto-with-vue",
-  "license": "MIT",
-  "main": "dist/vue-transition-expand.umd.min.js",
-  "files": [
-    "dist/vue-transition-expand.css"
-  ],
-  "private": false,
-  "scripts": {
-    "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build --name vue-transition-expand --entry ./src/main.js --target lib",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "vue": "^2.5.16"
-  },
-  "devDependencies": {
-    "@avalanche/eslint-config": "^2.0.0",
-    "@vue/cli-plugin-babel": "^3.0.0-beta.15",
-    "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
-    "@vue/cli-service": "^3.0.0-beta.15",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-vue": "^4.5.0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.2",
-    "vue-template-compiler": "^2.5.16"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+    "name": "vue3-transition-expand",
+    "version": "1.0.0",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/vue3-transition-expand.umd.cjs",
+    "module": "./dist/vue3-transition-expand.js",
+    "exports": {
+        ".": {
+            "import": "./dist/vue3-transition-expand.js",
+            "require": "./dist/vue3-transition-expand.umd.cjs"
+        },
+        "./dist/style.css": "./dist/style.css"
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "sass": "^1.58.0",
+        "vue": "^3.2.45"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^4.0.0",
+        "vite": "^4.0.0"
+    }
 }

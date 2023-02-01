@@ -1,88 +1,64 @@
-<script>
-export default {
-  name: `TransitionExpand`,
-  functional: true,
-  render(createElement, context) {
-    const data = {
-      props: {
-        name: `expand`,
-      },
-      on: {
-        afterEnter(element) {
-          // eslint-disable-next-line no-param-reassign
-          element.style.height = `auto`;
-        },
-        enter(element) {
-          const { width } = getComputedStyle(element);
+<template>
+    <Transition name="expand" @enter="enter" @after-enter="afterEnter" @leave="leave">
+        <div v-if="modelValue">
+            <slot />
+        </div>
+    </Transition>
+</template>
 
-          /* eslint-disable no-param-reassign */
-          element.style.width = width;
-          element.style.position = `absolute`;
-          element.style.visibility = `hidden`;
-          element.style.height = `auto`;
-          /* eslint-enable */
+<script setup lang="ts">
+import { computed } from 'vue';
 
-          const { height } = getComputedStyle(element);
+export interface Props {
+    duration?: number;
+    modelValue: boolean;
+}
 
-          /* eslint-disable no-param-reassign */
-          element.style.width = null;
-          element.style.position = null;
-          element.style.visibility = null;
-          element.style.height = 0;
-          /* eslint-enable */
+const props = withDefaults(defineProps<Props>(), {
+    duration: 300,
+    modelValue: false,
+});
 
-          // Force repaint to make sure the
-          // animation is triggered correctly.
-          // eslint-disable-next-line no-unused-expressions
-          getComputedStyle(element).height;
+const msDuration = computed(() => {
+    return `${props.duration}ms`;
+});
 
-          requestAnimationFrame(() => {
-            // eslint-disable-next-line no-param-reassign
-            element.style.height = height;
-          });
-        },
-        leave(element) {
-          const { height } = getComputedStyle(element);
-
-          // eslint-disable-next-line no-param-reassign
-          element.style.height = height;
-
-          // Force repaint to make sure the
-          // animation is triggered correctly.
-          // eslint-disable-next-line no-unused-expressions
-          getComputedStyle(element).height;
-
-          requestAnimationFrame(() => {
-            // eslint-disable-next-line no-param-reassign
-            element.style.height = 0;
-          });
-        },
-      },
-    };
-
-    return createElement(`transition`, data, context.children);
-  },
+const enter = (element: HTMLElement) => {
+    element.style.height = '0px';
+    requestAnimationFrame(() => {
+        element.style.height = element.scrollHeight + 'px';
+    });
+};
+const afterEnter = (element: any) => {
+    element.style.height = '';
+};
+const leave = (element: HTMLElement) => {
+    element.style.height = element.scrollHeight + 'px';
+    requestAnimationFrame(() => {
+        element.style.height = '0px';
+    });
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
-  will-change: height;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+    will-change: height;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 </style>
 
-<style>
+<style lang="scss">
 .expand-enter-active,
 .expand-leave-active {
-  transition: height 1s ease-in-out;
-  overflow: hidden;
+    transition: height v-bind(msDuration) ease-in-out;
+    overflow: hidden;
 }
-
-.expand-enter,
-.expand-leave-to {
-  height: 0;
+* {
+    will-change: height;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 </style>
