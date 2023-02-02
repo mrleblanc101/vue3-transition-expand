@@ -6,14 +6,14 @@ This is a project for transition element which height is auto based on this [art
 
 #### NPM
 ```bash
-yarn add vue3-transition-expand
-# or
 npm install vue3-transition-expand
+# or
+yarn add vue3-transition-expand
 ```
 
 ## Import
 
-#### Globally
+#### Global
 ```javascript
 import TransitionExpand from 'vue3-transition-expand'
 
@@ -25,20 +25,7 @@ Vue.use(TransitionExpand, {
 })
 ```
 
-
-#### Nuxt plugin
-```js
-import TransitionExpand from 'vue3-transition-expand';
-import 'vue3-transition-expand/dist/style.css';
-
-export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.use(TransitionExpand, {
-        duration: 300 // default
-    });
-});
-```
-
-#### SFC
+#### Component
 
 ```js
 import { TransitionExpand } from 'vue3-transition-expand';
@@ -55,11 +42,23 @@ export default {
 }
 ```
 
+#### Nuxt
+```js
+import TransitionExpand from 'vue3-transition-expand';
+import 'vue3-transition-expand/dist/style.css';
+
+export default defineNuxtPlugin((nuxtApp) => {
+    nuxtApp.vueApp.use(TransitionExpand, {
+        duration: 300 // default
+    });
+});
+```
+
 ## Example
 ```html
-<transition-expand v-model="expanded" :duration="300">
+<TransitionExpand :expanded="expanded" :duration="300">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</transition-expand>
+</TransitionExpand>
 <button @click="show = !show">Expand !</button>
 ```
 

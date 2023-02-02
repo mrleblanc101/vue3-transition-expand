@@ -1,6 +1,6 @@
 <template>
     <Transition name="expand" @enter="enter" @after-enter="afterEnter" @leave="leave">
-        <div v-if="modelValue">
+        <div v-if="expanded">
             <slot />
         </div>
     </Transition>
@@ -11,12 +11,12 @@ import { computed } from 'vue';
 
 export interface Props {
     duration?: number;
-    modelValue: boolean;
+    expanded: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
     duration: 300,
-    modelValue: false,
+    expanded: false,
 });
 
 const msDuration = computed(() => {
