@@ -63,8 +63,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 ```
 
 ## TODO
-- [ ] Add TypeScript Definition
-- [ ] Provide Nuxt module/plugin
 - [ ] Interupting should reverse the animation at it's current state instead of from the end
 - [ ] Do not extract styles ?
 - [ ] Auto-generate changelog, add CHANGELOG.md
