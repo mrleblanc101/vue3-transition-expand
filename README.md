@@ -1,10 +1,12 @@
-# Vue Transition Expand (for Vue 3)
+# Vue Transition Expand
 
-This is a project for transition element which height is auto based on this [article](https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/).
+This is a Vue 3 plugin to transition element to `height: auto;` based on [Markus
+Oberlehner article](https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/).
+
+#### 👉 [Demo on StackBlitz](https://stackblitz.com/edit/vue-e9x3oe?file=src/App.vue)
 
 ## Installation
 
-#### NPM
 ```bash
 npm install vue3-transition-expand
 # or
@@ -13,19 +15,16 @@ yarn add vue3-transition-expand
 
 ## Import
 
-#### Global
+### Global import
 ```javascript
 import TransitionExpand from 'vue3-transition-expand'
 
-Vue.use(TransitionExpand)
-
-// To override the default duration
 Vue.use(TransitionExpand, {
-    duration: 300 // default
+    // optional global options (see below)
 })
 ```
 
-#### Component
+### Local import
 
 ```js
 import { TransitionExpand } from 'vue3-transition-expand';
@@ -42,29 +41,41 @@ export default {
 }
 ```
 
-#### Nuxt
+### Nuxt plugin
 ```js
 import TransitionExpand from 'vue3-transition-expand';
 import 'vue3-transition-expand/dist/style.css';
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(TransitionExpand, {
-        duration: 300 // default
-    });
+        // optional global options (see below)
+    })
 });
 ```
 
-## Example
-```html
-<TransitionExpand :expanded="expanded" :duration="300">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</TransitionExpand>
-<button @click="show = !show">Expand !</button>
+## Configuration
+
+### Global Options
+```ts
+interface PluginOptions {
+    componentName?: string; // default 'TransitionExpand'
+    duration?: number; // default 300
+}
 ```
 
-## TODO
-- [ ] Add TypeScript Definition
-- [ ] Provide Nuxt module/plugin
-- [ ] Interupting should reverse the animation at it's current state instead of from the end
-- [ ] Do not extract styles ?
-- [ ] Auto-generate changelog, add CHANGELOG.md
+### Component Props
+```ts
+export interface Props {
+    expanded: boolean; // default false
+    duration?: number; // default: 300
+}
+```
+
+## Example
+
+```html
+<TransitionExpand :expanded="expanded">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</TransitionExpand>
+<button @click="expanded = !expanded">{{ !expanded ? 'Expand' : 'Collapse' }}</button>
+```
