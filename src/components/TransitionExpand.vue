@@ -10,8 +10,8 @@
 import { computed } from 'vue';
 
 export interface Props {
-    duration?: number;
     expanded: boolean;
+    duration?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -40,25 +40,10 @@ const leave = (element: HTMLElement) => {
 };
 </script>
 
-<style lang="scss" scoped>
-* {
-    will-change: height;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-}
-</style>
-
 <style lang="scss">
 .expand-enter-active,
 .expand-leave-active {
     transition: height v-bind(msDuration) ease-in-out;
     overflow: hidden;
-}
-* {
-    will-change: height;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
 }
 </style>

@@ -1,11 +1,14 @@
-import { App } from 'vue';
+import type { App } from 'vue';
 import TransitionExpand from './components/TransitionExpand.vue';
 
-export { TransitionExpand };
+export interface PluginOptions {
+    componentName?: string;
+    duration?: number;
+}
 
 export default {
-    install: (app: App, options: { duration?: number }) => {
-        app.component('TransitionExpand', {
+    install: (app: App, options: PluginOptions = {}) => {
+        app.component(options?.componentName || 'TransitionExpand', {
             extends: TransitionExpand,
             setup: TransitionExpand.setup,
             props: {
@@ -16,3 +19,5 @@ export default {
         });
     },
 };
+
+export { TransitionExpand };
