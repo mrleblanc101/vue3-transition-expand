@@ -58,16 +58,18 @@ export default defineNuxtPlugin((nuxtApp) => {
 ### Global Options
 ```ts
 interface PluginOptions {
-    componentName?: string; // default 'TransitionExpand'
-    duration?: number; // default 300
+    componentName?: string; // default: 'TransitionExpand'
+    duration?: number; // default: 300
+    hwAcceleration?: boolean // default: false
 }
 ```
 
 ### Component Props
 ```ts
 export interface Props {
-    expanded: boolean; // default false
+    expanded: boolean; // default: false
     duration?: number; // default: 300
+    hwAcceleration?: boolean; // default: false
 }
 ```
 

@@ -1,29 +1,34 @@
 <template>
     <Transition name="expand" @enter="enter" @after-enter="afterEnter" @leave="leave">
-        <div v-if="expanded">
+        <div v-if="expanded" :class="{ 'hw-acceleration': hwAcceleration }">
             <slot />
         </div>
     </Transition>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, inject, TransitionHooks } from 'vue';
+import { PLUGIN_KEY } from '../keys';
+import type { PluginOptions } from '../index';
 
 export interface Props {
     expanded: boolean;
     duration?: number;
+    hwAcceleration?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    duration: 300,
     expanded: false,
+    duration: () => inject<PluginOptions>(PLUGIN_KEY)?.duration || 300,
+    //@ts-ignore
+    hwAcceleration: () => inject<PluginOptions>(PLUGIN_KEY)?.hwAcceleration || false,
 });
 
 const msDuration = computed(() => {
     return `${props.duration}ms`;
 });
 
-const enter = (element: HTMLElement) => {
+const enter: TransitionHooks["enter"] = (element: HTMLElement) => {
     element.style.height = '0px';
     requestAnimationFrame(() => {
         element.style.height = element.scrollHeight + 'px';
@@ -32,13 +37,22 @@ const enter = (element: HTMLElement) => {
 const afterEnter = (element: any) => {
     element.style.height = '';
 };
-const leave = (element: HTMLElement) => {
+const leave: TransitionHooks["leave"] = (element: HTMLElement) => {
     element.style.height = element.scrollHeight + 'px';
     requestAnimationFrame(() => {
         element.style.height = '0px';
     });
 };
 </script>
+
+<style lang="scss" scoped>
+.hw-acceleration {
+    will-change: height;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+</style>
 
 <style lang="scss">
 .expand-enter-active,
