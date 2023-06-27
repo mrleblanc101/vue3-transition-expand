@@ -1,6 +1,6 @@
 <template>
     <Transition name="expand" @enter="enter" @after-enter="afterEnter" @leave="leave">
-        <div v-if="expanded" :class="{ 'hw-acceleration': hwAcceleration }">
+        <div v-if="expanded">
             <slot />
         </div>
     </Transition>
@@ -28,20 +28,26 @@ const msDuration = computed(() => {
     return `${props.duration}ms`;
 });
 
-const enter: TransitionHooks["enter"] = (element: HTMLElement) => {
-    element.style.height = '0px';
-    requestAnimationFrame(() => {
-        element.style.height = element.scrollHeight + 'px';
-    });
-};
-const afterEnter = (element: any) => {
-    element.style.height = '';
-};
-const leave: TransitionHooks["leave"] = (element: HTMLElement) => {
-    element.style.height = element.scrollHeight + 'px';
-    requestAnimationFrame(() => {
+const enter = (element: Element) => {
+    if(element instanceof HTMLElement) {
         element.style.height = '0px';
-    });
+        requestAnimationFrame(() => {
+            element.style.height = element.scrollHeight + 'px';
+        });
+    }
+};
+const afterEnter = (element: Element) => {
+    if(element instanceof HTMLElement) {
+        element.style.height = '';
+    }
+};
+const leave = (element: Element) => {
+    if(element instanceof HTMLElement) {
+        element.style.height = element.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+            element.style.height = '0px';
+        });
+    }
 };
 </script>
 
