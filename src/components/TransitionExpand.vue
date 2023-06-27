@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, TransitionHooks } from 'vue';
+import { computed, inject } from 'vue';
 import { PLUGIN_KEY } from '../keys';
 import type { PluginOptions } from '../index';
 
